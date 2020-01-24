@@ -31,10 +31,10 @@ const resultsWrapper = document.querySelector(".results");
 
 const onInput = async event => {
   const movies = await fetchData(event.target.value);
-if(!movies.length){
-    dropdown.classList.remove('is-active');
+  if (!movies.length) {
+    dropdown.classList.remove("is-active");
     return;
-}
+  }
   resultsWrapper.innerHTML = "";
   dropdown.classList.add("is-active");
   for (let movie of movies) {
@@ -45,14 +45,69 @@ if(!movies.length){
         <img src="${imgSrc}"/>
          ${movie.Title}
         `;
+    option.addEventListener("click", () => {
+      dropdown.classList.remove("is-active");
+      input.value = movie.Title;
+      onMovieSelect(movie);
+    });
     resultsWrapper.appendChild(option);
   }
 };
 
 input.addEventListener("input", debounce(onInput, 500));
 
-document.addEventListener('click', event => {
-    if(!root.contains(event.target)){
-        dropdown.classList.remove('is-active');
+document.addEventListener("click", event => {
+  if (!root.contains(event.target)) {
+    dropdown.classList.remove("is-active");
+  }
+});
+
+const onMovieSelect = async movie => {
+  const response = await axios.get("http://www.omdbapi.com/", {
+    params: {
+      apikey: "eefce230",
+      i: movie.imdbID
     }
-})
+  });
+  document.querySelector("#summary").innerHTML = movieTemplate(response.data);
+};
+
+const movieTemplate = movieDetail => {
+  return `
+    <article class="media">
+      <figure class="media-left"> 
+        <p class="image">
+          <img src="${movieDetail.Poster}"/>
+        </p>
+      </figure>
+      <div class="media-content"> 
+        <div class="content">
+          <h1>${movieDetail.Title}</h1> 
+          <h4>${movieDetail.Genre}</h4>
+          <p>${movieDetail.Plot}</p>
+        </div>
+      </div>
+    </article>
+    <article class="notification is-primary"> 
+      <p class="title">${movieDetail.Awards}</p>
+      <p class="subtitle">Awards</p>
+    </article>
+    <article class="notification is-primary"> 
+    <p class="title">${movieDetail.BoxOffice}</p>
+    <p class="subtitle">Box Office</p>
+  </article>
+  <article class="notification is-primary"> 
+  <p class="title">${movieDetail.Metascore}</p>
+  <p class="subtitle">Meta Score</p>
+</article>
+<article class="notification is-primary"> 
+<p class="title">${movieDetail.imdbRating}</p>
+<p class="subtitle">IMDB Rating</p>
+</article>
+<article class="notification is-primary"> 
+<p class="title">${movieDetail.imdbVotes}</p>
+<p class="subtitle">IMDB Votes</p>
+</article>
+  
+  `;
+};
