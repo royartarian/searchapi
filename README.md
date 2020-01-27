@@ -1,5 +1,7 @@
-<h1>Movie Search Widget</h1>
+<h1>Search Widget</h1>
 
-Simple and effective Movie Search widget built with JavaScript. HTML and CSS.
+Simple and effective Search widget built with JavaScript. HTML and CSS and can be customized to search any API.
 
-You can use any API structure and follow the same pattern. It's still under construction. 
+Any questions? 
+
+You can find me on <a href="https://www.twitter.com/rartarian">Twitter</a>
