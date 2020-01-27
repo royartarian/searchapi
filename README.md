@@ -4,5 +4,5 @@ Simple and effective Search widget built with JavaScript. HTML and CSS and can b
 
 Any questions? 
 
-You can find me on <a href="twitter.com/rartarian" target="_blank">Twitter</a>
+You can find me on <a href="https://www.twitter.com/rartarian">Twitter</a>
 
