@@ -1,6 +1,6 @@
 <h1>Search Widget</h1>
 
-Simple and effective Search widget with search preview built with JavaScript. HTML and CSS and you can configure any API to use this widget with a few changes. 
+Simple and effective Search widget with search preview built with JavaScript. HTML and CSS You can configure any API to use this widget with a few changes. 
 
 
 Any questions? 
